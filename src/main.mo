@@ -17,23 +17,24 @@ actor {
         cycles : Nat;
         settings : definite_canister_settings;
         module_hash : ?[Nat8];
+        idle_cycles_burned_per_day : Nat;
     };
 
     public type IC = actor {
         canister_status : { canister_id : canister_id } -> async canister_status;
     };
 
-    let ic : IC = actor("aaaaa-aa");
+    let ic : IC = actor ("aaaaa-aa");
 
     let CYGNUS_CANISTER_ID = "dowzh-nyaaa-aaaai-qnowq-cai";
 
-    public shared({ caller }) func canister_status(request : { canister_id : canister_id }) : async canister_status {
+    public shared ({ caller }) func canister_status(request : { canister_id : canister_id }) : async canister_status {
 
         // Only Cygnus can invoke this function and it prevents unwanted invocations
         if (caller != Principal.fromText(CYGNUS_CANISTER_ID)) {
             Prelude.unreachable();
         };
 
-        await ic.canister_status(request)
-    }
-}
+        await ic.canister_status(request);
+    };
+};
