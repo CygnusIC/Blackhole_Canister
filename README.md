@@ -10,12 +10,15 @@ It is about 40 lines, so it should be easy to convince ourselves that it is not 
 Next, we need to make sure that what is deployed on the Internet Computer is compiled from this source code. To do this, we can verify the hash of the Wasm binary from three sources: built by us (available in Github), built locally, and what is deployed.
 
 ```
-$ curl -Ls https://github.com/CygnusIC/Blackhole_Canister/blob/main/cygnus_blackhole.wasm |sha256sum
+$ git clone https://github.com/CygnusIC/Blackhole_Canister.git
+$ cd Blackhole_Canister
+$ cat cygnus_blackhole.wasm | sha256sum
 26f789b884355d69d99948c8fe836006c9d3e84ab82af759334fce184029e9ed  -
 ```
 
 ```
 $ git clone https://github.com/CygnusIC/Blackhole_Canister.git
+$ cd Blackhole_Canister
 $ dfx build cygnus_blackhole
 $ cat .dfx/local/canisters/cygnus_blackhole/cygnus_blackhole.wasm | sha256sum
 26f789b884355d69d99948c8fe836006c9d3e84ab82af759334fce184029e9ed  -
@@ -70,4 +73,3 @@ To set a black hole as your canister's **only** controller, run the above comman
 - dfx 0.8.4 to 0.11.2: replace `--add-controller` with `--controller`
 
 [dfx]: https://sdk.dfinity.org/docs/developers-guide/install-upgrade-remove
-[ic-utils]: https://github.com/ninegua/ic-utils
